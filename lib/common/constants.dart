@@ -1,0 +1,3 @@
+final String API_KEY = "696436b1ab094f34a449458cdc3ec120";
+final String API_READ_ACCESS = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2OTY0MzZiMWFiMDk0ZjM0YTQ0OTQ1OGNkYzNlYzEyMCIsInN1YiI6IjVlMzQ5NmY4NDMyNTBmMDAxOWJmYjViZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.zAVgSgRez46xDAf_5spDo7u3PtaBA_hTXMWQu-RMKDc";
+final String API_REQUEST = "https://api.themoviedb.org/3/movie/550?api_key=696436b1ab094f34a449458cdc3ec120";
