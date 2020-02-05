@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pelis/common/mediaProvider.dart';
 import 'package:pelis/widget/DrawerMovies.dart';
 import 'package:pelis/widget/mediaList.dart';
 void main() => runApp(MyApp());

@@ -2,13 +2,10 @@ import 'dart:async';
 
 import 'package:pelis/model/media.dart';
 import 'package:pelis/http/httpHandler.dart';
-import 'package:http/http.dart' as http;
 
 abstract class MediaProvider {
-
   Future<List<Media>> fetchMedia();
 }
-
 
 class Movies extends MediaProvider{
   
@@ -20,7 +17,7 @@ class Movies extends MediaProvider{
   }
 }
 
-class tvSeries extends MediaProvider{
+class TvSeries extends MediaProvider{
   
   @override
   Future<List<Media>> fetchMedia() {
@@ -29,3 +26,4 @@ class tvSeries extends MediaProvider{
     return _client.fechTvSeries();
   }
 }
+enum MediaType { movie, tv}

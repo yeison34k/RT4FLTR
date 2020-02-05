@@ -1,5 +1,6 @@
 import 'package:pelis/common/generesUtil.dart';
 import 'package:pelis/common/imageUtil.dart';
+import 'package:pelis/common/mediaProvider.dart';
 
 class Media {
   int id;
@@ -24,17 +25,17 @@ class Media {
     return 0;
   }
 
-  factory Media(Map jsonMap) {
-    return Media.deserialize(jsonMap);
+  factory Media(Map jsonMap, MediaType mediaType) {
+    return Media.deserialize(jsonMap, mediaType);
   }
 
-  Media.deserialize(Map json)
+  Media.deserialize(Map json, MediaType mediaType)
       : this.id = json["id"].toInt(),
         this.voteAverage = json["vote_average"].toDouble(),
         this.title = json["title"],
         this.posterPath = json["poster_path"] ?? "",
         this.backDropPath = json["backdrop_path"] ?? "",
         this.overview = json["overview"],
-        this.releaseDate = json["release_date"],
+        this.releaseDate = json[mediaType == MediaType.movie ? "release_date" : "first_air_date"],
         this.genereIds = json["genre_ids"];
 }

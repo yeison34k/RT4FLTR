@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:pelis/common/constants.dart';
+import 'package:pelis/common/mediaProvider.dart';
 import 'package:pelis/model/media.dart';
 
 class HttpHandler {
@@ -25,7 +26,7 @@ class HttpHandler {
         {'api_key': API_KEY, 'page': "1", 'languaje': _languaje});
 
     return getUrl(uri).then(
-        ((data) => data["results"].map<Media>((item) => new Media(item)).toList()));
+        ((data) => data["results"].map<Media>((item) => new Media(item, MediaType.movie)).toList()));
   }
 
   Future<List<Media>> fechTvSeries() {
@@ -33,7 +34,7 @@ class HttpHandler {
         {'api_key': API_KEY, 'page': "1", 'languaje': _languaje});
 
     return getUrl(uri).then(
-        ((data) => data["results"].map<Media>((item) => new Media(item)).toList()));
+        ((data) => data["results"].map<Media>((item) => new Media(item, MediaType.tv)).toList()));
   }
 
 }
