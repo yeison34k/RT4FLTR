@@ -44,7 +44,10 @@ class MediaListItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Container(
+                      width: 320.0,
                       child: Text(media.title,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold)),
@@ -71,6 +74,12 @@ class MediaListItem extends StatelessWidget {
                         children: <Widget>[
                           Text(media.voteAverage.toString(), style: TextStyle(color: Colors.white),),
                           Icon(Icons.star, color: Colors.white,  size: 16.0,)
+                        ],
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Text(media.getReleaseDate().toString(), style: TextStyle(color: Colors.white),),
+                          Icon(Icons.calendar_today, color: Colors.white,  size: 16.0,)
                         ],
                       )
                     ],

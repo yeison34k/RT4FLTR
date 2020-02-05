@@ -17,6 +17,13 @@ class Media {
 
   String getGenere() => getGeneresValues(genereIds);
 
+  int getReleaseDate() {
+    if( !releaseDate.isEmpty ) 
+      return DateTime.parse(releaseDate).year;
+    
+    return 0;
+  }
+
   factory Media(Map jsonMap) {
     return Media.deserialize(jsonMap);
   }
@@ -28,6 +35,6 @@ class Media {
         this.posterPath = json["poster_path"] ?? "",
         this.backDropPath = json["backdrop_path"] ?? "",
         this.overview = json["overview"],
-        this.releaseDate = json["releaseDate"],
+        this.releaseDate = json["release_date"],
         this.genereIds = json["genre_ids"];
 }
