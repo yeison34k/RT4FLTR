@@ -13,14 +13,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: MyHomePage(title: 'Movies'),
+      home: MyHomePage(title: "Pelis",),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key key, this.title, this.media}) : super(key: key);
   final String title;
+  final MediaType media;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -43,7 +44,8 @@ class _MyHomePageState extends State<MyHomePage> {
       drawer: DrawerMovies(context),
       body: PageView(
         children: <Widget>[
-          MediaList()
+          MediaList(media: widget.media),
+
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

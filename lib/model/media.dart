@@ -32,7 +32,7 @@ class Media {
   Media.deserialize(Map json, MediaType mediaType)
       : this.id = json["id"].toInt(),
         this.voteAverage = json["vote_average"].toDouble(),
-        this.title = json["title"],
+        this.title = json["title"] ?? json["name"],
         this.posterPath = json["poster_path"] ?? "",
         this.backDropPath = json["backdrop_path"] ?? "",
         this.overview = json["overview"],

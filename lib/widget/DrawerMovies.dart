@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pelis/common/mediaProvider.dart';
+import 'package:pelis/main.dart';
 
 // ignore: must_be_immutable
 class DrawerMovies extends StatefulWidget {
@@ -50,6 +51,8 @@ class _DrawerMoviesState extends State<DrawerMovies> {
           title: Text('Movies'),
           onTap: () {
             _changeMediaType(MediaType.movie);
+            Navigator.pop(widget.parentContext, MaterialPageRoute(builder: (widget) => MyHomePage(title: "Movies", media: mediaType)));
+
           }),
       ListTile(
           selected: mediaType == MediaType.tv,
@@ -57,6 +60,8 @@ class _DrawerMoviesState extends State<DrawerMovies> {
           title: Text('Tv Series'),
           onTap: () {
             _changeMediaType(MediaType.tv);
+            Navigator.push(widget.parentContext , MaterialPageRoute(builder: (widget) => MyHomePage(title: "Tv Series", media: mediaType)));
+
           }),
       ListTile(
         leading: Icon(Icons.close),
