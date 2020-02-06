@@ -15,18 +15,10 @@ class DrawerMovies extends StatefulWidget {
 }
 
 class _DrawerMoviesState extends State<DrawerMovies> {
-  final MediaProvider mediaProvider = new Movies();
-
-  final MediaProvider tvProvider = new TvSeries();
-
-  MediaType mediaType = MediaType.movie;
+  MediaType mediaType;
 
   _changeMediaType(MediaType media) {
-    if (media != mediaType) {
-      setState(() {
-        mediaType = media;
-      });
-    }
+    setState(() => mediaType = media);
   }
 
   @override
@@ -51,8 +43,12 @@ class _DrawerMoviesState extends State<DrawerMovies> {
           title: Text('Movies'),
           onTap: () {
             _changeMediaType(MediaType.movie);
-            Navigator.pop(widget.parentContext, MaterialPageRoute(builder: (widget) => MyHomePage(title: "Movies", media: mediaType)));
-
+            Navigator.push(
+                widget.parentContext,
+                MaterialPageRoute(
+                    maintainState: false,
+                    builder: (widget) =>
+                        MyHomePage(title: "Movies", media: mediaType)));
           }),
       ListTile(
           selected: mediaType == MediaType.tv,
@@ -60,8 +56,12 @@ class _DrawerMoviesState extends State<DrawerMovies> {
           title: Text('Tv Series'),
           onTap: () {
             _changeMediaType(MediaType.tv);
-            Navigator.push(widget.parentContext , MaterialPageRoute(builder: (widget) => MyHomePage(title: "Tv Series", media: mediaType)));
-
+            Navigator.push(
+                widget.parentContext,
+                MaterialPageRoute(
+                    maintainState: false,
+                    builder: (widget) =>
+                        MyHomePage(title: "Tv Series", media: mediaType)));
           }),
       ListTile(
         leading: Icon(Icons.close),

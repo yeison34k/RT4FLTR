@@ -21,7 +21,7 @@ class MediaListItem extends StatelessWidget {
             children: <Widget>[
               FadeInImage.assetNetwork(
                 image: media.getPoster(),
-                placeholder: media.getPoster(),
+                placeholder: "",
                 fit: BoxFit.cover,
                 width: double.infinity,
                 height: 200.0,

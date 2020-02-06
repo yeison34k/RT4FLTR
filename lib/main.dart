@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pelis/common/mediaProvider.dart';
 import 'package:pelis/widget/DrawerMovies.dart';
 import 'package:pelis/widget/mediaList.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -13,7 +14,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: MyHomePage(title: "Pelis",),
+      home: MyHomePage(
+        title: "Pelis",
+      ),
     );
   }
 }
@@ -28,10 +31,20 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  void _incrementCounter() {
+  int _page = 0;
+  PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = new PageController();
   }
 
-
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,18 +56,18 @@ class _MyHomePageState extends State<MyHomePage> {
       ]),
       drawer: DrawerMovies(context),
       body: PageView(
-        children: <Widget>[
-          MediaList(media: widget.media),
-
-        ],
+        children: _getMediaList(), //_getMediaList(),
+        controller: _pageController,
+        onPageChanged: (int index) {
+          setState(() {
+            _page = index;
+          });
+        },
       ),
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _page,
+        onTap: _navigationTapped(_page),
         items: _getFooterItems(),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
@@ -62,9 +75,31 @@ class _MyHomePageState extends State<MyHomePage> {
   List<BottomNavigationBarItem> _getFooterItems() {
     return [
       BottomNavigationBarItem(
-          icon: Icon(Icons.thumb_up), title: Text("¡Que cuca!")),
+          icon: Icon(Icons.thumb_up), title: Text("¡Las mas cucas!")),
       BottomNavigationBarItem(
-          icon: Icon(Icons.thumb_down), title: Text("¡Uy que gonorrea!")),
+          icon: Icon(Icons.autorenew), title: Text("¡Las melas!")),
+      BottomNavigationBarItem(
+          icon: Icon(Icons.star), title: Text("¡Y las de todos!"))
+    ];
+  }
+
+  _navigationTapped(int page) {
+    if( _pageController.hasClients ) {
+      _pageController.animateToPage(page,
+      duration: const Duration(milliseconds: 300), curve: Curves.elasticOut);
+    }
+
+  }
+
+  List<Widget> _getMediaList() {
+    return  widget.media == MediaType.movie ? <Widget>[
+      MediaList(widget.media, type: "popular"),
+      MediaList(widget.media, type: "upcoming"),
+      MediaList(widget.media, type: "top_rated"),
+    ] : <Widget>[
+      MediaList(widget.media, type: "popular"),
+      MediaList(widget.media, type: "on_the_air"),
+      MediaList(widget.media, type: "top_rated")
     ];
   }
 }

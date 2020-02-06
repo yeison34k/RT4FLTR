@@ -6,8 +6,9 @@ import 'package:pelis/widget/mediaListItem.dart';
 
 class MediaList extends StatefulWidget {
   final MediaType media;
+  final String type;
 
-  MediaList({this.media});
+  MediaList(this.media, {Key key, this.type}): super(key: key);
 
   @override
   _MediaListState createState() => _MediaListState();
@@ -21,6 +22,14 @@ class _MediaListState extends State<MediaList> {
     loadMovies();
     super.initState();
   }
+  @override
+  void didUpdateWidget(MediaList oldWidget) {
+    if(oldWidget.media != widget.media) {
+      _mediaList = new List();
+      loadMovies();
+    }
+    super.didUpdateWidget(oldWidget);
+  }
 
   @override
   void dispose() {
@@ -30,13 +39,11 @@ class _MediaListState extends State<MediaList> {
   void loadMovies() async {
     MediaType media = widget.media;
 
-
-    print(media.toString());
     var movieOrTv;
     if (MediaType.movie == media) {
-      movieOrTv = await HttpHandler().fechMovies();
+      movieOrTv = await HttpHandler().fechMovies(type: widget.type);
     } else {
-      movieOrTv = await HttpHandler().fechTvSeries();
+      movieOrTv = await HttpHandler().fechTvSeries(type: widget.type);
     }
     
     setState(() {

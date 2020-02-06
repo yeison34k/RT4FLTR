@@ -21,16 +21,16 @@ class HttpHandler {
     return json.decode(response.body);
   }
 
-  Future<List<Media>> fechMovies() {
-    var uri = new Uri.https(_baseUrl, "3/movie/popular",
+  Future<List<Media>> fechMovies({String type:  "popular"}) {
+    var uri = new Uri.https(_baseUrl, "3/movie/$type",
         {'api_key': API_KEY, 'page': "1", 'languaje': _languaje});
 
     return getUrl(uri).then(
         ((data) => data["results"].map<Media>((item) => new Media(item, MediaType.movie)).toList()));
   }
 
-  Future<List<Media>> fechTvSeries() {
-    var uri = new Uri.https(_baseUrl, "3/tv/popular",
+  Future<List<Media>> fechTvSeries({String type:  "popular"}) {
+    var uri = new Uri.https(_baseUrl, "3/tv/$type",
         {'api_key': API_KEY, 'page': "1", 'languaje': _languaje});
 
     return getUrl(uri).then(

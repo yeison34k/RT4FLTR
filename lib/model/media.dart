@@ -19,7 +19,7 @@ class Media {
   String getGenere() => getGeneresValues(genereIds);
 
   int getReleaseDate() {
-    if( !releaseDate.isEmpty ) 
+    if( releaseDate.isNotEmpty )
       return DateTime.parse(releaseDate).year;
     
     return 0;
@@ -32,10 +32,10 @@ class Media {
   Media.deserialize(Map json, MediaType mediaType)
       : this.id = json["id"].toInt(),
         this.voteAverage = json["vote_average"].toDouble(),
-        this.title = json["title"] ?? json["name"],
+        this.title = json["title"] ?? json["name"] ?? "",
         this.posterPath = json["poster_path"] ?? "",
         this.backDropPath = json["backdrop_path"] ?? "",
-        this.overview = json["overview"],
+        this.overview = json["overview"] ?? "",
         this.releaseDate = json[mediaType == MediaType.movie ? "release_date" : "first_air_date"],
-        this.genereIds = json["genre_ids"];
+        this.genereIds = json["genre_ids"] ?? "";
 }
