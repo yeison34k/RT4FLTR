@@ -52,6 +52,7 @@ class _MediaListState extends State<MediaList> {
       _mediaList.addAll(movieOrTv);
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -61,7 +62,7 @@ class _MediaListState extends State<MediaList> {
             return FlatButton(
                 onPressed: () {
                   Navigator.push((context), new MaterialPageRoute(builder: (context) {
-                    return MediaDetails(_mediaList[i]);
+                    return MediaDetails(_mediaList[i], widget.media);
                   }));
                 },
                 child: MediaListItem(_mediaList[i]));
