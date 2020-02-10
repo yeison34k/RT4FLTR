@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:pelis/model/cast.dart';
 import 'package:pelis/model/media.dart';
-import 'package:pelis/http/httpHandler.dart';
+import 'package:pelis/resources/apiProvider.dart';
+import 'package:pelis/resources/repository.dart';
 
 abstract class MediaProvider {
   Future<List<Media>> fetchMedia();
@@ -15,14 +16,14 @@ class Movies extends MediaProvider{
   
   @override
   Future<List<Media>> fetchMedia() {
-    HttpHandler _client = HttpHandler.get();
+    ApiProvider _client = ApiProvider.get();
     return _client.fechMovies();
   }
 
   @override
   Future<List<Cast>> fetchCreditsMedia(int mediaId) {
-    HttpHandler _client = HttpHandler.get();
-    return _client.fechCastMovies(mediaId);
+    Repository _client = Repository.get();
+    return _client.fechCast(mediaId);
   }
 }
 
@@ -30,13 +31,13 @@ class TvSeries extends MediaProvider{
   
   @override
   Future<List<Media>> fetchMedia() {
-    HttpHandler _client = HttpHandler.get();
+    ApiProvider _client = ApiProvider.get();
     return _client.fechTvSeries();
   }
 
   @override
   Future<List<Cast>> fetchCreditsMedia(int mediaId) {
-    HttpHandler _client = HttpHandler.get();
+    Repository _client = Repository.get();
     return _client.fechCastTv(mediaId);
   }
 }

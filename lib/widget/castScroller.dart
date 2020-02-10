@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pelis/common/mediaProvider.dart';
 import 'package:pelis/http/httpHandler.dart';
 import 'package:pelis/model/cast.dart';
+import 'package:pelis/resources/apiProvider.dart';
+import 'package:pelis/resources/repository.dart';
 
 class CastScroller extends StatefulWidget {
   final int idMedia;
@@ -21,9 +23,9 @@ class _CastScrollerState extends State<CastScroller> {
 
     var movieOrTv;
     if (MediaType.movie == media) {
-      movieOrTv = await HttpHandler().fechCastMovies(widget.idMedia);
+      movieOrTv = await Repository().fechCast(widget.idMedia);
     } else {
-      movieOrTv = await HttpHandler().fechCastTv(widget.idMedia);
+      movieOrTv = await Repository().fechCastTv(widget.idMedia);
     }
 
     setState(() {
